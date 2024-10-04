@@ -1,0 +1,1164 @@
+mse version: 2.0.0
+game: magic
+short name: Rarity Preview
+full name: Preview All Rarities
+icon: card-sample.png
+installer group: magic/m15 style/normal cards
+position hint: 801
+
+version: 2022-09-29
+
+card width: 375
+card height: 523
+card dpi: 150
+depends on:
+	package: magic.mse-game
+	version: 2020-04-25
+
+#card blanks: ?
+#alt rarity colors: cajun
+#the idiot: 2wb
+
+############################################################## Extra scripts
+init script:
+	use_main_rarity := { contains(set.mainframe_rarity_name, match: ".png")}
+	un_png := replace@(match:".png", replace: "")
+	
+	alt_rarity_inverted := {styling.alt_rarity_inverted != ""}
+	
+	alt_rarity_common := {styling.alt_rarity_common != ""}
+	
+	alt_rarity_uncommon := {styling.alt_rarity_uncommon != ""}
+	
+	alt_rarity_rare := {styling.alt_rarity_rare != ""}
+	
+	alt_rarity_mythic := {styling.alt_rarity_mythic != ""}
+	
+	alt_rarity_special := {styling.alt_rarity_special != ""}
+	
+	alt_rarity_masterpiece := {styling.alt_rarity_masterpiece != ""}
+	
+	alt_rarity_color_inverted := {
+		string := "83,67,53:177,150,131:0,0,0:0,0,0:0.07:"
+		if match(styling.alt_rarity_inverted, match:":$") then string := styling.alt_rarity_inverted
+		colons := length(filter_text(string, match:":"))
+		output := split_text(string, match:",|:")
+		splits := split_text(string, match:":")
+		if colons == 4
+			then output := split_text(string+"0.07:", match:",|:")
+		if colons == 3
+			then output := split_text(string+splits[2]+"0.07:", match:",|:")
+		else if colons == 2
+			then output := split_text(string+"0,0,0:0,0,0:0.07:", match:",|:")
+		else if colons == 1
+			then output := split_text(string+splits[0]+":0,0,0:0,0,0:0.07:", match:",|:")
+		
+		output
+	}
+	alt_symbol_inverted := {symbol_variation(symbol:set.symbol, border_radius: alt_rarity_color_inverted().12, fill_type: "linear gradient", fill_color_1: rgb(alt_rarity_color_inverted().0, alt_rarity_color_inverted().1, alt_rarity_color_inverted().2), fill_color_2: rgb(alt_rarity_color_inverted().3, alt_rarity_color_inverted().4, alt_rarity_color_inverted().5), border_color_1: rgb(alt_rarity_color_inverted().6, alt_rarity_color_inverted().7, alt_rarity_color_inverted().8), border_color_2: rgb(alt_rarity_color_inverted().9, alt_rarity_color_inverted().10, alt_rarity_color_inverted().11), center_x:0.5, center_y:0.5, end_x:1, end_y:1)}
+	
+	alt_rarity_color_common := {
+		string := "83,67,53:177,150,131:0,0,0:0,0,0:0.07:"
+		if match(styling.alt_rarity_common, match:":$") then string := styling.alt_rarity_common
+		colons := length(filter_text(string, match:":"))
+		output := split_text(string, match:",|:")
+		splits := split_text(string, match:":")
+		if colons == 4
+			then output := split_text(string+"0.07:", match:",|:")
+		if colons == 3
+			then output := split_text(string+splits[2]+"0.07:", match:",|:")
+		else if colons == 2
+			then output := split_text(string+"0,0,0:0,0,0:0.07:", match:",|:")
+		else if colons == 1
+			then output := split_text(string+splits[0]+":0,0,0:0,0,0:0.07:", match:",|:")
+		
+		output
+	}
+	alt_symbol_common := {symbol_variation(symbol:set.symbol, border_radius: alt_rarity_color_common().12, fill_type: "linear gradient", fill_color_1: rgb(alt_rarity_color_common().0, alt_rarity_color_common().1, alt_rarity_color_common().2), fill_color_2: rgb(alt_rarity_color_common().3, alt_rarity_color_common().4, alt_rarity_color_common().5), border_color_1: rgb(alt_rarity_color_common().6, alt_rarity_color_common().7, alt_rarity_color_common().8), border_color_2: rgb(alt_rarity_color_common().9, alt_rarity_color_common().10, alt_rarity_color_common().11), center_x:0.5, center_y:0.5, end_x:1, end_y:1)}
+	
+	
+	alt_rarity_color_uncommon := {
+		string := "83,67,53:177,150,131:0,0,0:0,0,0:0.07:"
+		if match(styling.alt_rarity_uncommon, match:":$") then string := styling.alt_rarity_uncommon
+		colons := length(filter_text(string, match:":"))
+		output := split_text(string, match:",|:")
+		splits := split_text(string, match:":")
+		if colons == 4
+			then output := split_text(string+"0.07:", match:",|:")
+		if colons == 3
+			then output := split_text(string+splits[2]+"0.07:", match:",|:")
+		else if colons == 2
+			then output := split_text(string+"0,0,0:0,0,0:0.07:", match:",|:")
+		else if colons == 1
+			then output := split_text(string+splits[0]+":0,0,0:0,0,0:0.07:", match:",|:")
+		
+		output
+	}
+	alt_symbol_uncommon := {symbol_variation(symbol:set.symbol, border_radius: alt_rarity_color_uncommon().12, fill_type: "linear gradient", fill_color_1: rgb(alt_rarity_color_uncommon().0, alt_rarity_color_uncommon().1, alt_rarity_color_uncommon().2), fill_color_2: rgb(alt_rarity_color_uncommon().3, alt_rarity_color_uncommon().4, alt_rarity_color_uncommon().5), border_color_1: rgb(alt_rarity_color_uncommon().6, alt_rarity_color_uncommon().7, alt_rarity_color_uncommon().8), border_color_2: rgb(alt_rarity_color_uncommon().9, alt_rarity_color_uncommon().10, alt_rarity_color_uncommon().11), center_x:0.5, center_y:0.5, end_x:1, end_y:1)}
+	
+	
+	alt_rarity_color_rare := {
+		string := "83,67,53:177,150,131:0,0,0:0,0,0:0.07:"
+		if match(styling.alt_rarity_rare, match:":$") then string := styling.alt_rarity_rare
+		colons := length(filter_text(string, match:":"))
+		output := split_text(string, match:",|:")
+		splits := split_text(string, match:":")
+		if colons == 4
+			then output := split_text(string+"0.07:", match:",|:")
+		if colons == 3
+			then output := split_text(string+splits[2]+"0.07:", match:",|:")
+		else if colons == 2
+			then output := split_text(string+"0,0,0:0,0,0:0.07:", match:",|:")
+		else if colons == 1
+			then output := split_text(string+splits[0]+":0,0,0:0,0,0:0.07:", match:",|:")
+		
+		output
+	}
+	alt_symbol_rare := {symbol_variation(symbol:set.symbol, border_radius: alt_rarity_color_rare().12, fill_type: "linear gradient", fill_color_1: rgb(alt_rarity_color_rare().0, alt_rarity_color_rare().1, alt_rarity_color_rare().2), fill_color_2: rgb(alt_rarity_color_rare().3, alt_rarity_color_rare().4, alt_rarity_color_rare().5), border_color_1: rgb(alt_rarity_color_rare().6, alt_rarity_color_rare().7, alt_rarity_color_rare().8), border_color_2: rgb(alt_rarity_color_rare().9, alt_rarity_color_rare().10, alt_rarity_color_rare().11), center_x:0.5, center_y:0.5, end_x:1, end_y:1)}
+	
+	
+	alt_rarity_color_mythic := {
+		string := "83,67,53:177,150,131:0,0,0:0,0,0:0.07:"
+		if match(styling.alt_rarity_mythic, match:":$") then string := styling.alt_rarity_mythic
+		colons := length(filter_text(string, match:":"))
+		output := split_text(string, match:",|:")
+		splits := split_text(string, match:":")
+		if colons == 4
+			then output := split_text(string+"0.07:", match:",|:")
+		if colons == 3
+			then output := split_text(string+splits[2]+"0.07:", match:",|:")
+		else if colons == 2
+			then output := split_text(string+"0,0,0:0,0,0:0.07:", match:",|:")
+		else if colons == 1
+			then output := split_text(string+splits[0]+":0,0,0:0,0,0:0.07:", match:",|:")
+		
+		output
+	}
+	alt_symbol_mythic := {symbol_variation(symbol:set.symbol, border_radius: alt_rarity_color_mythic().12, fill_type: "linear gradient", fill_color_1: rgb(alt_rarity_color_mythic().0, alt_rarity_color_mythic().1, alt_rarity_color_mythic().2), fill_color_2: rgb(alt_rarity_color_mythic().3, alt_rarity_color_mythic().4, alt_rarity_color_mythic().5), border_color_1: rgb(alt_rarity_color_mythic().6, alt_rarity_color_mythic().7, alt_rarity_color_mythic().8), border_color_2: rgb(alt_rarity_color_mythic().9, alt_rarity_color_mythic().10, alt_rarity_color_mythic().11), center_x:0.5, center_y:0.5, end_x:1, end_y:1)}
+	
+	
+	alt_rarity_color_special := {
+		string := "83,67,53:177,150,131:0,0,0:0,0,0:0.07:"
+		if match(styling.alt_rarity_special, match:":$") then string := styling.alt_rarity_special
+		colons := length(filter_text(string, match:":"))
+		output := split_text(string, match:",|:")
+		splits := split_text(string, match:":")
+		if colons == 4
+			then output := split_text(string+"0.07:", match:",|:")
+		if colons == 3
+			then output := split_text(string+splits[2]+"0.07:", match:",|:")
+		else if colons == 2
+			then output := split_text(string+"0,0,0:0,0,0:0.07:", match:",|:")
+		else if colons == 1
+			then output := split_text(string+splits[0]+":0,0,0:0,0,0:0.07:", match:",|:")
+		
+		output
+	}
+	alt_symbol_special := {symbol_variation(symbol:set.symbol, border_radius: alt_rarity_color_special().12, fill_type: "linear gradient", fill_color_1: rgb(alt_rarity_color_special().0, alt_rarity_color_special().1, alt_rarity_color_special().2), fill_color_2: rgb(alt_rarity_color_special().3, alt_rarity_color_special().4, alt_rarity_color_special().5), border_color_1: rgb(alt_rarity_color_special().6, alt_rarity_color_special().7, alt_rarity_color_special().8), border_color_2: rgb(alt_rarity_color_special().9, alt_rarity_color_special().10, alt_rarity_color_special().11), center_x:0.5, center_y:0.5, end_x:1, end_y:1)}
+	
+	
+	alt_rarity_color_masterpiece := {
+		string := "83,67,53:177,150,131:0,0,0:0,0,0:0.07:"
+		if match(styling.alt_rarity_masterpiece, match:":$") then string := styling.alt_rarity_masterpiece
+		colons := length(filter_text(string, match:":"))
+		output := split_text(string, match:",|:")
+		splits := split_text(string, match:":")
+		if colons == 4
+			then output := split_text(string+"0.07:", match:",|:")
+		if colons == 3
+			then output := split_text(string+splits[2]+"0.07:", match:",|:")
+		else if colons == 2
+			then output := split_text(string+"0,0,0:0,0,0:0.07:", match:",|:")
+		else if colons == 1
+			then output := split_text(string+splits[0]+":0,0,0:0,0,0:0.07:", match:",|:")
+		
+		output
+	}
+	alt_symbol_masterpiece := {symbol_variation(symbol:set.symbol, border_radius: alt_rarity_color_masterpiece().12, fill_type: "linear gradient", fill_color_1: rgb(alt_rarity_color_masterpiece().0, alt_rarity_color_masterpiece().1, alt_rarity_color_masterpiece().2), fill_color_2: rgb(alt_rarity_color_masterpiece().3, alt_rarity_color_masterpiece().4, alt_rarity_color_masterpiece().5), border_color_1: rgb(alt_rarity_color_masterpiece().6, alt_rarity_color_masterpiece().7, alt_rarity_color_masterpiece().8), border_color_2: rgb(alt_rarity_color_masterpiece().9, alt_rarity_color_masterpiece().10, alt_rarity_color_masterpiece().11), center_x:0.5, center_y:0.5, end_x:1, end_y:1)}
+	
+	
+############################################################## Set info fields
+set info style:
+	symbol:
+		variation:
+			name: invertedcommon
+			border radius: 0.10
+			fill type: solid
+			fill color:   rgb(255,255,255)
+			border color: rgb(0,0,0)
+set info style:
+	symbol:
+		variation:
+			name: special
+			border radius: 0.10
+			fill type: solid
+			fill color:   rgb(155,155,155)
+			border color: rgb(0,0,0)
+
+############################################################## Extra style options
+styling field:
+	type: text
+	name: alt rarity inverted
+	description: Use a custom color for the inverted rarity symbol. Formatted as "R1,G1,B1:R2,G2,B2:..." 1 and 2 are fill color, 3 and 4 border color
+styling field:
+	type: text
+	name: alt rarity common
+	description: Use a custom color for the common rarity symbol. Formatted as "R1,G1,B1:R2,G2,B2:..." 1 and 2 are fill color, 3 and 4 border color
+styling field:
+	type: text
+	name: alt rarity uncommon
+	description: Use a custom color for the uncommon rarity symbol. Formatted as "R1,G1,B1:R2,G2,B2:..." 1 and 2 are fill color, 3 and 4 border color
+styling field:
+	type: text
+	name: alt rarity rare
+	description: Use a custom color for the rare rarity symbol. Formatted as "R1,G1,B1:R2,G2,B2:..." 1 and 2 are fill color, 3 and 4 border color
+styling field:
+	type: text
+	name: alt rarity mythic
+	description: Use a custom color for the mythic rarity symbol. Formatted as "R1,G1,B1:R2,G2,B2:..." 1 and 2 are fill color, 3 and 4 border color
+styling field:
+	type: text
+	name: alt rarity special
+	description: Use a custom color for the special rarity symbol. Formatted as "R1,G1,B1:R2,G2,B2:..." 1 and 2 are fill color, 3 and 4 border color
+styling field:
+	type: text
+	name: alt rarity masterpiece
+	description: Use a custom color for the masterpiece rarity symbol. Formatted as "R1,G1,B1:R2,G2,B2:..." 1 and 2 are fill color, 3 and 4 border color
+
+
+card style:
+	############################# Background stuff
+	border color:
+		left: 0
+		top : 0
+		width:	375
+		height:	523
+		radius: 18
+		left width:   17
+		right width:  17
+		top width:    17
+		bottom width: 18
+		z index: 4
+	card color:
+		left:	0
+		top:	0
+		width:	375
+		height:	523
+		z index: 0
+		render style: image
+		popup style: in place
+		image: { "ccard.png" }
+
+
+############################################################## Extra card fields
+extra card field: 
+	type: choice
+	choice: preview colorless
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview colorless inverted common
+extra card field: 
+	type: choice
+	choice: preview colorless
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview colorless common
+extra card field: 
+	type: choice
+	choice: preview colorless
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview colorless uncommon
+extra card field: 
+	type: choice
+	choice: preview colorless
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview colorless rare
+extra card field: 
+	type: choice
+	choice: preview colorless
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview colorless mythic
+extra card field: 
+	type: choice
+	choice: preview colorless
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview colorless special
+extra card field: 
+	type: choice
+	choice: preview colorless
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview colorless masterpiece
+
+extra card field: 
+	type: choice
+	choice: preview white
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview white inverted common
+extra card field: 
+	type: choice
+	choice: preview white
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview white common
+extra card field: 
+	type: choice
+	choice: preview white
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview white uncommon
+extra card field: 
+	type: choice
+	choice: preview white
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview white rare
+extra card field: 
+	type: choice
+	choice: preview white
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview white mythic
+extra card field: 
+	type: choice
+	choice: preview white
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview white special
+extra card field: 
+	type: choice
+	choice: preview white
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview white masterpiece
+
+extra card field: 
+	type: choice
+	choice: preview blue
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview blue inverted common
+extra card field: 
+	type: choice
+	choice: preview blue
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview blue common
+extra card field: 
+	type: choice
+	choice: preview blue
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview blue uncommon
+extra card field: 
+	type: choice
+	choice: preview blue
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview blue rare
+extra card field: 
+	type: choice
+	choice: preview blue
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview blue mythic
+extra card field: 
+	type: choice
+	choice: preview blue
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview blue special
+extra card field: 
+	type: choice
+	choice: preview blue
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview blue masterpiece
+
+extra card field: 
+	type: choice
+	choice: preview black
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview black inverted common
+extra card field: 
+	type: choice
+	choice: preview black
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview black common
+extra card field: 
+	type: choice
+	choice: preview black
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview black uncommon
+extra card field: 
+	type: choice
+	choice: preview black
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview black rare
+extra card field: 
+	type: choice
+	choice: preview black
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview black mythic
+extra card field: 
+	type: choice
+	choice: preview black
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview black special
+extra card field: 
+	type: choice
+	choice: preview black
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview black masterpiece
+
+extra card field: 
+	type: choice
+	choice: preview red
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview red inverted common
+extra card field: 
+	type: choice
+	choice: preview red
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview red common
+extra card field: 
+	type: choice
+	choice: preview red
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview red uncommon
+extra card field: 
+	type: choice
+	choice: preview red
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview red rare
+extra card field: 
+	type: choice
+	choice: preview red
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview red mythic
+extra card field: 
+	type: choice
+	choice: preview red
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview red special
+extra card field: 
+	type: choice
+	choice: preview red
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview red masterpiece
+
+extra card field: 
+	type: choice
+	choice: preview green
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview green inverted common
+extra card field: 
+	type: choice
+	choice: preview green
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview green common
+extra card field: 
+	type: choice
+	choice: preview green
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview green uncommon
+extra card field: 
+	type: choice
+	choice: preview green
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview green rare
+extra card field: 
+	type: choice
+	choice: preview green
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview green mythic
+extra card field: 
+	type: choice
+	choice: preview green
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview green special
+extra card field: 
+	type: choice
+	choice: preview green
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview green masterpiece
+
+extra card field: 
+	type: choice
+	choice: preview artifact
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview artifact inverted common
+extra card field: 
+	type: choice
+	choice: preview artifact
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview artifact common
+extra card field: 
+	type: choice
+	choice: preview artifact
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview artifact uncommon
+extra card field: 
+	type: choice
+	choice: preview artifact
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview artifact rare
+extra card field: 
+	type: choice
+	choice: preview artifact
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview artifact mythic
+extra card field: 
+	type: choice
+	choice: preview artifact
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview artifact special
+extra card field: 
+	type: choice
+	choice: preview artifact
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview artifact masterpiece
+
+extra card field: 
+	type: choice
+	choice: preview multi
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview multi inverted common
+extra card field: 
+	type: choice
+	choice: preview multi
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview multi common
+extra card field: 
+	type: choice
+	choice: preview multi
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview multi uncommon
+extra card field: 
+	type: choice
+	choice: preview multi
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview multi rare
+extra card field: 
+	type: choice
+	choice: preview multi
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview multi mythic
+extra card field: 
+	type: choice
+	choice: preview multi
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview multi special
+extra card field: 
+	type: choice
+	choice: preview multi
+	editable: false
+	save value: false
+	show statistics: false
+	name: preview multi masterpiece
+
+extra card style:
+	preview multi inverted common:
+		right: { 344 - 50 * 6 }
+		top: { 31 + 62 * 7 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png" else if alt_rarity_inverted() then alt_symbol_inverted() else symbol_variation(symbol: set.symbol, variation: "invertedcommon") }
+	preview multi common:
+		right: { 344 - 50 * 5 }
+		top: { 31 + 62 * 7 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png" else if alt_rarity_common() then alt_symbol_common() else symbol_variation(symbol: set.symbol, variation: "common") }
+	preview multi uncommon:
+		right: { 344 - 50 * 4 }
+		top: { 31 + 62 * 7 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "u.png" else if alt_rarity_uncommon() then alt_symbol_uncommon() else symbol_variation(symbol: set.symbol, variation: "uncommon") }
+	preview multi rare:
+		right: { 344 - 50 * 3 }
+		top: { 31 + 62 * 7 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "r.png" else if alt_rarity_rare() then alt_symbol_rare() else symbol_variation(symbol: set.symbol, variation: "rare") }
+	preview multi mythic:
+		right: { 344 - 50 * 2 }
+		top: { 31 + 62 * 7 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "m.png" else if alt_rarity_mythic() then alt_symbol_mythic() else symbol_variation(symbol: set.symbol, variation: "mythic rare") }
+	preview multi special:
+		right: { 344 - 50 * 1 }
+		top: { 31 + 62 * 7 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "s.png" else if alt_rarity_special() then alt_symbol_special() else symbol_variation(symbol: set.symbol, variation: "special") }
+	preview multi masterpiece:
+		right: { 344 - 50 * 0 }
+		top: { 31 + 62 * 7 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "mp.png" else if alt_rarity_masterpiece() then alt_symbol_masterpiece() else symbol_variation(symbol: set.masterpiece_symbol, variation: "mythic rare") }
+
+	preview artifact inverted common:
+		right: { 344 - 50 * 6 }
+		top: { 31 + 62 * 6 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png" else if alt_rarity_inverted() then alt_symbol_inverted() else symbol_variation(symbol: set.symbol, variation: "invertedcommon") }
+	preview artifact common:
+		right: { 344 - 50 * 5 }
+		top: { 31 + 62 * 6 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png" else if alt_rarity_common() then alt_symbol_common() else symbol_variation(symbol: set.symbol, variation: "common") }
+	preview artifact uncommon:
+		right: { 344 - 50 * 4 }
+		top: { 31 + 62 * 6 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "u.png" else if alt_rarity_uncommon() then alt_symbol_uncommon() else symbol_variation(symbol: set.symbol, variation: "uncommon") }
+	preview artifact rare:
+		right: { 344 - 50 * 3 }
+		top: { 31 + 62 * 6 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "r.png" else if alt_rarity_rare() then alt_symbol_rare() else symbol_variation(symbol: set.symbol, variation: "rare") }
+	preview artifact mythic:
+		right: { 344 - 50 * 2 }
+		top: { 31 + 62 * 6 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "m.png" else if alt_rarity_mythic() then alt_symbol_mythic() else symbol_variation(symbol: set.symbol, variation: "mythic rare") }
+	preview artifact special:
+		right: { 344 - 50 * 1 }
+		top: { 31 + 62 * 6 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "s.png" else if alt_rarity_special() then alt_symbol_special() else symbol_variation(symbol: set.symbol, variation: "special") }
+	preview artifact masterpiece:
+		right: { 344 - 50 * 0 }
+		top: { 31 + 62 * 6 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "mp.png" else if alt_rarity_masterpiece() then alt_symbol_masterpiece() else symbol_variation(symbol: set.masterpiece_symbol, variation: "mythic rare") }
+
+
+	preview green inverted common:
+		right: { 344 - 50 * 6 }
+		top: { 31 + 62 * 5 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png" else if alt_rarity_inverted() then alt_symbol_inverted() else symbol_variation(symbol: set.symbol, variation: "invertedcommon") }
+	preview green common:
+		right: { 344 - 50 * 5 }
+		top: { 31 + 62 * 5 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png" else if alt_rarity_common() then alt_symbol_common() else symbol_variation(symbol: set.symbol, variation: "common") }
+	preview green uncommon:
+		right: { 344 - 50 * 4 }
+		top: { 31 + 62 * 5 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "u.png" else if alt_rarity_uncommon() then alt_symbol_uncommon() else symbol_variation(symbol: set.symbol, variation: "uncommon") }
+	preview green rare:
+		right: { 344 - 50 * 3 }
+		top: { 31 + 62 * 5 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "r.png" else if alt_rarity_rare() then alt_symbol_rare() else symbol_variation(symbol: set.symbol, variation: "rare") }
+	preview green mythic:
+		right: { 344 - 50 * 2 }
+		top: { 31 + 62 * 5 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "m.png" else if alt_rarity_mythic() then alt_symbol_mythic() else symbol_variation(symbol: set.symbol, variation: "mythic rare") }
+	preview green special:
+		right: { 344 - 50 * 1 }
+		top: { 31 + 62 * 5 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "s.png" else if alt_rarity_special() then alt_symbol_special() else symbol_variation(symbol: set.symbol, variation: "special") }
+	preview green masterpiece:
+		right: { 344 - 50 * 0 }
+		top: { 31 + 62 * 5 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "mp.png" else if alt_rarity_masterpiece() then alt_symbol_masterpiece() else symbol_variation(symbol: set.masterpiece_symbol, variation: "mythic rare") }
+
+	preview red inverted common:
+		right: { 344 - 50 * 6 }
+		top: { 31 + 62 * 4 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png" else if alt_rarity_inverted() then alt_symbol_inverted() else symbol_variation(symbol: set.symbol, variation: "invertedcommon") }
+	preview red common:
+		right: { 344 - 50 * 5 }
+		top: { 31 + 62 * 4 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png" else if alt_rarity_common() then alt_symbol_common() else symbol_variation(symbol: set.symbol, variation: "common") }
+	preview red uncommon:
+		right: { 344 - 50 * 4 }
+		top: { 31 + 62 * 4 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "u.png" else if alt_rarity_uncommon() then alt_symbol_uncommon() else symbol_variation(symbol: set.symbol, variation: "uncommon") }
+	preview red rare:
+		right: { 344 - 50 * 3 }
+		top: { 31 + 62 * 4 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "r.png" else if alt_rarity_rare() then alt_symbol_rare() else symbol_variation(symbol: set.symbol, variation: "rare") }
+	preview red mythic:
+		right: { 344 - 50 * 2 }
+		top: { 31 + 62 * 4 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "m.png" else if alt_rarity_mythic() then alt_symbol_mythic() else symbol_variation(symbol: set.symbol, variation: "mythic rare") }
+	preview red special:
+		right: { 344 - 50 * 1 }
+		top: { 31 + 62 * 4 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "s.png" else if alt_rarity_special() then alt_symbol_special() else symbol_variation(symbol: set.symbol, variation: "special") }
+	preview red masterpiece:
+		right: { 344 - 50 * 0 }
+		top: { 31 + 62 * 4 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "mp.png" else if alt_rarity_masterpiece() then alt_symbol_masterpiece() else symbol_variation(symbol: set.masterpiece_symbol, variation: "mythic rare") }
+	preview black inverted common:
+		right: { 344 - 50 * 6 }
+		top: { 31 + 62 * 3 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png" else if alt_rarity_inverted() then alt_symbol_inverted() else symbol_variation(symbol: set.symbol, variation: "invertedcommon") }
+	preview black common:
+		right: { 344 - 50 * 5 }
+		top: { 31 + 62 * 3 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png" else if alt_rarity_common() then alt_symbol_common() else symbol_variation(symbol: set.symbol, variation: "common") }
+	preview black uncommon:
+		right: { 344 - 50 * 4 }
+		top: { 31 + 62 * 3 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "u.png" else if alt_rarity_uncommon() then alt_symbol_uncommon() else symbol_variation(symbol: set.symbol, variation: "uncommon") }
+	preview black rare:
+		right: { 344 - 50 * 3 }
+		top: { 31 + 62 * 3 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "r.png" else if alt_rarity_rare() then alt_symbol_rare() else symbol_variation(symbol: set.symbol, variation: "rare") }
+	preview black mythic:
+		right: { 344 - 50 * 2 }
+		top: { 31 + 62 * 3 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "m.png" else if alt_rarity_mythic() then alt_symbol_mythic() else symbol_variation(symbol: set.symbol, variation: "mythic rare") }
+	preview black special:
+		right: { 344 - 50 * 1 }
+		top: { 31 + 62 * 3 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "s.png" else if alt_rarity_special() then alt_symbol_special() else symbol_variation(symbol: set.symbol, variation: "special") }
+	preview black masterpiece:
+		right: { 344 - 50 * 0 }
+		top: { 31 + 62 * 3 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "mp.png" else if alt_rarity_masterpiece() then alt_symbol_masterpiece() else symbol_variation(symbol: set.masterpiece_symbol, variation: "mythic rare") }
+
+	preview blue inverted common:
+		right: { 344 - 50 * 6 }
+		top: { 31 + 62 * 2 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png" else if alt_rarity_inverted() then alt_symbol_inverted() else symbol_variation(symbol: set.symbol, variation: "invertedcommon") }
+	preview blue common:
+		right: { 344 - 50 * 5 }
+		top: { 31 + 62 * 2 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png" else if alt_rarity_common() then alt_symbol_common() else symbol_variation(symbol: set.symbol, variation: "common") }
+	preview blue uncommon:
+		right: { 344 - 50 * 4 }
+		top: { 31 + 62 * 2 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "u.png" else if alt_rarity_uncommon() then alt_symbol_uncommon() else symbol_variation(symbol: set.symbol, variation: "uncommon") }
+	preview blue rare:
+		right: { 344 - 50 * 3 }
+		top: { 31 + 62 * 2 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "r.png" else if alt_rarity_rare() then alt_symbol_rare() else symbol_variation(symbol: set.symbol, variation: "rare") }
+	preview blue mythic:
+		right: { 344 - 50 * 2 }
+		top: { 31 + 62 * 2 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "m.png" else if alt_rarity_mythic() then alt_symbol_mythic() else symbol_variation(symbol: set.symbol, variation: "mythic rare") }
+	preview blue special:
+		right: { 344 - 50 * 1 }
+		top: { 31 + 62 * 2 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "s.png" else if alt_rarity_special() then alt_symbol_special() else symbol_variation(symbol: set.symbol, variation: "special") }
+	preview blue masterpiece:
+		right: { 344 - 50 * 0 }
+		top: { 31 + 62 * 2 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "mp.png" else if alt_rarity_masterpiece() then alt_symbol_masterpiece() else symbol_variation(symbol: set.masterpiece_symbol, variation: "mythic rare") }
+
+	preview white inverted common:
+		right: { 344 - 50 * 6 }
+		top: { 31 + 62 * 1 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png" else if alt_rarity_inverted() then alt_symbol_inverted() else symbol_variation(symbol: set.symbol, variation: "invertedcommon") }
+	preview white common:
+		right: { 344 - 50 * 5 }
+		top: { 31 + 62 * 1 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png" else if alt_rarity_common() then alt_symbol_common() else symbol_variation(symbol: set.symbol, variation: "common") }
+	preview white uncommon:
+		right: { 344 - 50 * 4 }
+		top: { 31 + 62 * 1 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "u.png" else if alt_rarity_uncommon() then alt_symbol_uncommon() else symbol_variation(symbol: set.symbol, variation: "uncommon") }
+	preview white rare:
+		right: { 344 - 50 * 3 }
+		top: { 31 + 62 * 1 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "r.png" else if alt_rarity_rare() then alt_symbol_rare() else symbol_variation(symbol: set.symbol, variation: "rare") }
+	preview white mythic:
+		right: { 344 - 50 * 2 }
+		top: { 31 + 62 * 1 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "m.png" else if alt_rarity_mythic() then alt_symbol_mythic() else symbol_variation(symbol: set.symbol, variation: "mythic rare") }
+	preview white special:
+		right: { 344 - 50 * 1 }
+		top: { 31 + 62 * 1 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "s.png" else if alt_rarity_special() then alt_symbol_special() else symbol_variation(symbol: set.symbol, variation: "special") }
+	preview white masterpiece:
+		right: { 344 - 50 * 0 }
+		top: { 31 + 62 * 1 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "mp.png" else if alt_rarity_masterpiece() then alt_symbol_masterpiece() else symbol_variation(symbol: set.masterpiece_symbol, variation: "mythic rare") }
+	preview colorless inverted common:
+		right: { 344 - 50 * 6 }
+		top: { 31 + 62 * 0 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png" else if alt_rarity_inverted() then alt_symbol_inverted() else symbol_variation(symbol: set.symbol, variation: "invertedcommon") }
+	preview colorless common:
+		right: { 344 - 50 * 5 }
+		top: { 31 + 62 * 0 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "c.png" else if alt_rarity_common() then alt_symbol_common() else symbol_variation(symbol: set.symbol, variation: "common") }
+	preview colorless uncommon:
+		right: { 344 - 50 * 4 }
+		top: { 31 + 62 * 0 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "u.png" else if alt_rarity_uncommon() then alt_symbol_uncommon() else symbol_variation(symbol: set.symbol, variation: "uncommon") }
+	preview colorless rare:
+		right: { 344 - 50 * 3 }
+		top: { 31 + 62 * 0 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "r.png" else if alt_rarity_rare() then alt_symbol_rare() else symbol_variation(symbol: set.symbol, variation: "rare") }
+	preview colorless mythic:
+		right: { 344 - 50 * 2 }
+		top: { 31 + 62 * 0 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "m.png" else if alt_rarity_mythic() then alt_symbol_mythic() else symbol_variation(symbol: set.symbol, variation: "mythic rare") }
+	preview colorless special:
+		right: { 344 - 50 * 1 }
+		top: { 31 + 62 * 0 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "s.png" else if alt_rarity_special() then alt_symbol_special() else symbol_variation(symbol: set.symbol, variation: "special") }
+	preview colorless masterpiece:
+		right: { 344 - 50 * 0 }
+		top: { 31 + 62 * 0 }
+		width: 44
+		height: 22
+		z index: 5
+		render style: image
+		alignment: middle right
+		image: { if use_main_rarity() then "/magic-mainframe-extras.mse-include/" + un_png(set.mainframe_rarity_name) + "mp.png" else if alt_rarity_masterpiece() then alt_symbol_masterpiece() else symbol_variation(symbol: set.masterpiece_symbol, variation: "mythic rare") }
